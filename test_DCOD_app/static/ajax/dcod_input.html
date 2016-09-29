@@ -1,0 +1,10 @@
+Select region:
+<select id="region" required>
+    <% _.each(regions, function (region) { %>
+        <option><%- region %></option>
+    <% }) %>
+</select><br>
+<input type="text" id="city" placeholder="City"><br>
+<input type="text" id="population" placeholder="Population"><br>
+<input type="button" class="save_city" value="Save"><br>
+<input type="button" class="show" value="Show statistics">

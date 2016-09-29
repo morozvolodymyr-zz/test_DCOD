@@ -1,6 +1,7 @@
 from django.conf.urls import url
-# from django.contrib import admin
+from test_DCOD_app.views import DCODView, get_regions
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
+    url(r'^$', DCODView.as_view()),
+    url(r'^add$', get_regions),
 ]

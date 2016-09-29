@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test dcod</title>
+    {% load static from staticfiles %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script type="text/javascript">
+        var root_url = 'http://127.0.0.1:8000';
+        function dcod(){
+            $(window).load('static/ajax/index.html', function (template) {
+                $.ajax({
+                    type: 'GET',
+                    url: root_url,
+                    success: function(){
+                        $('#dcod').html(
+                                _.template(template)()
+                        );
+                        $(function () {
+                                $(".add")
+                                        .click(function () {
+                                            add_city();
+                                        })
+                            });
+                            $(function () {
+                                $(".show")
+                                        .click(function () {
+                                            show_statistics();
+                                        })
+                            })
+                    }
+                })
+            })
+        }
+        function add_city() {
+            $(window).load('static/ajax/dcod_input.html', function (template) {
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: root_url + '/add',
+                    success: function (data, text_status, jq) {
+                        var regions = data.regions;
+                        $('#dcod').html(
+                                _.template(template)({
+                                    regions: regions
+                                })
+                        )
+                    }
+                })
+            })
+        }
+    </script>
+</head>
+<body onload="dcod()">
+    <div id="dcod">
+    </div>
+</body>
+</html>

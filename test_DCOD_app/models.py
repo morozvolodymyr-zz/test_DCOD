@@ -2,4 +2,10 @@ from django.db import models
 
 
 class Region(models.Model):
-    role = models.CharField(max_length=20)
+    region = models.CharField(max_length=20)
+
+
+class City(models.Model):
+    city = models.CharField(max_length=20)
+    population = models.IntegerField
+    id_region = models.ForeignKey(to=Region, on_delete=models.CASCADE, related_name='id_region')
