@@ -45,9 +45,34 @@
                                 _.template(template)({
                                     regions: regions
                                 })
-                        )
+                        );
+                        $(function (){
+                            $(".save_city")
+                                    .click(function (){
+                                        var region = $('#region').val();
+                                        var city = $('#city').val();
+                                        var population = $('#population').val();
+                                        var obj = {};
+                                        obj[city] = population;
+                                        save_city(region, obj)
+                                    })
+                        })
                     }
                 })
+            })
+        }
+        function save_city(region, obj){
+            $.ajax({
+                type:'POST',
+                contentType: 'application/json',
+                url: root_url + '/save_city/',
+                data: JSON.stringify({
+                    'region':region,
+                    'obj':obj
+                    }),
+                success: function(data, text_status, jq){
+                    add_city()
+                }
             })
         }
     </script>
