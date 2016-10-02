@@ -20,7 +20,7 @@
                         $(function () {
                                 $(".add")
                                         .click(function () {
-                                            add_city();
+                                            add_city(1);
                                         })
                             });
                             $(function () {
@@ -33,7 +33,7 @@
                 })
             })
         }
-        function add_city() {
+        function add_city(num) {
             $(window).load('static/ajax/dcod_input.html', function (template) {
                 $.ajax({
                     type: 'GET',
@@ -43,32 +43,52 @@
                         var regions = data.regions;
                         $('#dcod').html(
                                 _.template(template)({
-                                    regions: regions
+                                    regions: regions,
+                                    number: num
                                 })
                         );
                         $(function (){
                             $(".save_city")
                                     .click(function (){
                                         var region = $('#region').val();
-                                        var city = $('#city').val();
-                                        var population = $('#population').val();
-                                        var obj = {};
-                                        obj[city] = population;
-                                        save_city(region, obj)
+                                        var t_rows = {};
+                                        $("tbody tr").each(function(index){
+                                            var c = $(this).find("#city").val();
+                                            t_rows[c] = $(this).find("#population").val();
+                                        });
+                                        update_region(t_rows, region);
                                     })
+                        });
+                        $(function (){
+                            var scntDiv = $('#p_scents');
+                            var i = $('#p_scents tr').size() + 1;
+                            $(".one_more")
+                                    .click(function (){
+                                        scntDiv.append('<tr><td><input type="text" id="city" placeholder="City" ' +
+                                                'required></td> <td><input type="text" id="population" placeholder=' +
+                                                '"Population" required></td><td><input type="button" class="rem" ' +
+                                                'value="Remove"></td></tr>');
+                                        i++;
+                                    });
+                           $(document).on('click', '.rem', function() {
+                               if (i > 2) {
+                                   $(this).closest('tr').remove();
+                                   i--;
+                               }
+                           });
                         })
                     }
                 })
             })
         }
-        function save_city(region, obj){
+        function update_region(t_rows, region){
             $.ajax({
                 type:'POST',
                 contentType: 'application/json',
-                url: root_url + '/save_city/',
+                url: root_url + '/update_region/',
                 data: JSON.stringify({
-                    'region':region,
-                    'obj':obj
+                    'updated_region':t_rows,
+                    'region': region
                     }),
                 success: function(data, text_status, jq){
                     add_city()

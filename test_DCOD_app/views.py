@@ -26,12 +26,11 @@ def get_regions(request):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def save_city(request):
+def update_region(request):
         json_data = JSONParser().parse(request)
-        obj = json_data['obj']
+        updated_region = json_data['updated_region']
         region = json_data['region']
         id_region = Region.objects.filter(region=region).first()
-        for key in obj:
-            pop = int(obj[key])
-            City.objects.create(city=key, population=pop, id_region=id_region)
+        for key in updated_region:
+            City.objects.create(city=key, population=int(updated_region[key]), id_region=id_region)
         return HttpResponse('ok', status=status.HTTP_200_OK)
