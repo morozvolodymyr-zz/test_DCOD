@@ -1,19 +1,41 @@
-Select region:
-<select id="region" class="form-control" required>
-    <% _.each(regions, function (region) { %>
-        <option><%- region %></option>
-    <% }) %>
-</select><br>
-<table class="dynamictable">
-    <tbody id="p_scents">
-        <tr>
-            <td><input type="text" id="city" placeholder="City" required></td>
-            <td><input type="text" id="population" placeholder="Population" required></td>
-        </tr>
-    </tbody>
-</table>
-
-<input type="button" class="one_more" value="One more"><br>
-
-<input type="button" class="save_city" value="Save"><br>
-<input type="button" class="show" value="Show statistics">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Test DCOD</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+            <button type="button" class="show show-update btn btn-primary">Show statistics
+                <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+            </button>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<div class="dcod">
+    <div class="form-group">
+        <label for="region">Select region:</label>
+        <select id="region" class="form-control" required>
+            <% _.each(regions, function (region) { %>
+                <option><%- region %></option>
+            <% }) %>
+        </select>
+    </div>
+    <table class="dynamictable">
+        <tbody id="p_scents">
+            <tr>
+                <td><input type="text" class="form-control" id="city" placeholder="City" required></td>
+                <td><input type="text" class="form-control" id="population" placeholder="Population" required></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <button type="button" class="one_more btn btn-success btn-sm">New line
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="save_city btn btn-success btn-sm">Save
+        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+    </button>
+</div>

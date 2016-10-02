@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^$', DCODView.as_view()),
     url(r'^add$', get_regions),
     url(r'^update_region', update_region),
+    url(r'^statistics$', get_regions),
 ]

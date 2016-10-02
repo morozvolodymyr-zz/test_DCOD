@@ -1,0 +1,45 @@
+#region {
+    width: 15%;
+}
+
+.cover {
+    display: table;
+    width: 100%;
+    height:100vh;
+    min-height: 100%;
+    -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+
+.inner {
+    width: 50%;
+    margin: 100px auto auto;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#outer {
+    width: 100%;
+    text-align: center;
+}
+
+.dcod {
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+button.rem {
+    margin-left: 5px;
+}
+
+button.save_city {
+    margin-left: 300px;
+}
+
+button.show-update {
+    margin-top: 8px;
+}
+
+button.show-index {
+    margin: 10px auto auto;
+}

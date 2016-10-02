@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>test dcod</title>
     {% load static from staticfiles %}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">#}
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/dcod.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script type="text/javascript">
@@ -65,10 +65,10 @@
                             var i = $('#p_scents tr').size() + 1;
                             $(".one_more")
                                     .click(function (){
-                                        scntDiv.append('<tr><td><input type="text" id="city" placeholder="City" ' +
-                                                'required></td> <td><input type="text" id="population" placeholder=' +
-                                                '"Population" required></td><td><input type="button" class="rem" ' +
-                                                'value="Remove"></td></tr>');
+                                        scntDiv.append('<tr><td><input type="text" class="form-control" id="city" placeholder="City" ' +
+                                                'required></td> <td><input type="text" class="form-control" id="population" placeholder=' +
+                                                '"Population" required></td><td><button type="button" class="rem btn btn-danger btn-xs" ' +
+                                                '><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td></tr>');
                                         i++;
                                     });
                            $(document).on('click', '.rem', function() {
@@ -94,6 +94,23 @@
                 success: function(data, text_status, jq){
                     add_city()
                 }
+            })
+        }
+        function show_statistics(){
+            $(window).load('static/ajax/statistics.html', function (template) {
+                $.ajax({
+                    type:'GET',
+                    contextType:'application/json',
+                    url: root_url + '/statistics',
+                    success: function (data, text_status, jq) {
+                        var regions = data.regions;
+                        $('#dcod').html(
+                                _.template(template)({
+                                    regions: regions
+                                })
+                        );
+                    }
+                })
             })
         }
     </script>
